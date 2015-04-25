@@ -5,13 +5,13 @@
 ** Login   <wery_a@epitech.net>
 ** 
 ** Started on  Fri Apr  3 17:32:29 2015 adrien wery
-** Last update Sat Apr 25 18:18:49 2015 Adrien WERY
+** Last update Sat Apr 25 20:21:22 2015 Adrien WERY
 */
 
 #include <stdio.h>
 #include "lem_in.h"
 
-int	get_path(room_t **room, char **tab)
+int	get_path(room_t **room, link_t **link, char **tab)
 {
   room_t	*t1;
   room_t	*t2;
@@ -22,14 +22,15 @@ int	get_path(room_t **room, char **tab)
     t1 = t1->next;
   while (t2 && my_strcmp(tab[1], t2->name) != 0)
     t2 = t2->next;
+  free_double(tab);
   if (!t1 || !t2)
     return (my_error("Room doesn't exist", -1));
-  printf("%s link with %s\n", t1->name, t2->name);
-  free_double(tab);
+  if ( add_link(link, t1->name, t2->name) == -1)
+    return (-1);
   return (0);
 }
 
-char	*check_line(char *s, room_t **room, char cmd)
+char	*check_line(char *s, room_t **room, link_t **link, char cmd)
 {
   char	**tab;
   char	*name;
@@ -37,22 +38,44 @@ char	*check_line(char *s, room_t **room, char cmd)
   if (s[0] == '#')
     return ("comment");
   name = NULL;
-  tab = my_str_to_wordtab(s, ' ', 0);
+  if ((tab = my_str_to_wordtab(s, ' ', 0)) == NULL)
+    {
+      my_error("Malloc Failed in my_str_to_wordtab", -1);
+      return (NULL);
+    }
   if (tab[0] && tab[1] && tab[2])
     {
-      if (add_room(room, tab[0], my_getnbr_base(tab[1], "0123456789"),
-		   my_getnbr_base(tab[2], "0123456789")) == -1)
-	return (NULL);
-      if ((name = my_strdup(tab[0])) == NULL)
+      if ((add_room(room, tab[0], my_getnbr_base(tab[1], "0123456789"),
+		    my_getnbr_base(tab[2], "0123456789")) == -1)
+	  || ((name = my_strdup(tab[0])) == NULL))
 	return (NULL);
     }
-  else
-    get_path(room, my_str_to_wordtab(s, '-', 0));
+  else if (get_path(room, link, my_str_to_wordtab(s, '-', 0)) == -1)
+    return (NULL);
   free_double(tab);
   if (cmd == 1)
     return (name);
   free(name);
   return ("good");
+}
+
+int	check_struct(lem_t *lem)
+{
+  int	rooms;
+  int	paths;
+
+  if (!lem->start)
+    return (my_error("No ##start in the file", -1));
+  if (!lem->end)
+    return (my_error("No ##end in the file", -1));
+  rooms = 0;
+  paths = 0;
+  show(lem->room, lem->link, &rooms, &paths);
+  if (rooms < 2)
+    return (my_error("Need 2 rooms or more", -1));
+  else if (paths < rooms - 1)
+    return (my_error("Some rooms aren't link", -1));
+  return (0);
 }
 
 int	get_struct(int fd, lem_t *lem)
@@ -65,42 +88,45 @@ int	get_struct(int fd, lem_t *lem)
 	{
 	  free(s);
 	  s = epur_str(get_next_line(fd));
-	  lem->start = check_line(s, &(lem->room), 1);
+	  if ((lem->start = check_line(s, &(lem->room), &(lem->link), 1)) == NULL)
+	    return (-1);
 	}
-      else if (my_strcmp("##end", s) == 0)
+      if (my_strcmp("##end", s) == 0)
 	{
 	  free(s);
 	  s = epur_str(get_next_line(fd));
-	  lem->end = check_line(s, &(lem->room), 1);
+	  if ((lem->end = check_line(s, &(lem->room), &(lem->link), 1)) == NULL)
+	    return (-1);
 	}
-      else
-	{
-	  check_line(s, &(lem->room), 0);
-	  free(s);
-	}
+      else if (check_line(s, &(lem->room), &(lem->link), 0) == NULL)
+	return (-1);
+      free(s);
     }
-  show(lem->room);
-  printf("start = %s\t end = %s\n", lem->start, lem->end);
-  return (0);
+  return (check_struct(lem));
 }
 
-int	parsing(char *file)
+int	parsing(char *file, char *room1, char *room2)
 {
+  char	go;
   int	fd;
   lem_t	*lem;
 
   if ((fd = open(file, O_RDONLY)) == -1)
-    return (-1);
-  lem = init_lem();
-  get_struct(fd, lem);
+    return (my_error("Can't Open The File", -1));
+  if ((lem = init_lem()) == NULL)
+    return (my_error("Can't Init the lem struct", 1));
+  if (get_struct(fd, lem) == -1)
+    return (my_error("Can't Get Rooms and Paths", 1));
   free_struct(lem);
+  go = can_go(lem->link, room1, room2);
+  display_can_go(room1, room2, go);
   return (0);
 }
 
 int	main(int argc, char **argv)
 {
-  if (argc < 2)
+  if (argc < 4)
     return (my_error("\n\tUsage : ./lem_in <file_name>\n", -1));
-  parsing(argv[1]);
+  parsing(argv[1], argv[2], argv[3]);
   return (0);
 }

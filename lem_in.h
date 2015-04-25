@@ -5,13 +5,20 @@
 ** Login   <wery_a@epitech.net>
 ** 
 ** Started on  Fri Apr  3 17:46:37 2015 adrien wery
-** Last update Sat Apr 25 18:17:58 2015 Adrien WERY
+** Last update Sat Apr 25 20:17:44 2015 Adrien WERY
 */
 
 #include <sys/stat.h>
 #include <fcntl.h>
 #include <unistd.h>
 #include <stdlib.h>
+
+typedef struct	link_s
+{
+  char		*room1;
+  char		*room2;
+  struct link_s	*next;
+}		link_t;
 
 typedef struct	room_s
 {
@@ -24,6 +31,7 @@ typedef struct	room_s
 typedef struct	lem_s
 {
   room_t	*room;
+  link_t	*link;
   char		**paths;
   char		*start;
   char		*end;
@@ -53,5 +61,10 @@ char    *my_re_alloc(char *s);
 /* STRUCT FUNCTIONS */
 lem_t   *init_lem();
 int	add_room(room_t **rooms, char *name, int x, int y);
-void    show(room_t *room);
+int     add_link(link_t **links, char *room1, char *room2);
+void    show(room_t *room, link_t *link, int *rooms, int *paths);
 void	free_struct(lem_t *lem);
+
+/* CAN GO FUNCTIONS */
+void    display_can_go(char *room1, char *room2, int go);
+int     can_go(link_t *link, char *room1, char *room2);
