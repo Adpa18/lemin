@@ -5,7 +5,7 @@
 ** Login   <wery_a@epitech.net>
 ** 
 ** Started on  Sat Apr 25 15:14:13 2015 Adrien WERY
-** Last update Sat Apr 25 17:11:54 2015 Adrien WERY
+** Last update Sat Apr 25 20:20:46 2015 Adrien WERY
 */
 
 #include "lem_in.h"
@@ -43,7 +43,10 @@ char    *my_strdup(char *s)
   i = 0;
   size = my_str(s, 0);
   if ((dup = malloc(sizeof(char) * (size + 1))) ==  NULL)
-    return (NULL);
+    {
+      my_error("Malloc Failed in my_strdup function", -1);
+      return (NULL);
+    }
   my_memset(dup, '\0', size + 1);
   while (s && s[i] != '\0')
     {
@@ -72,8 +75,10 @@ char    *epur_str(char *s)
     return (NULL);
   i = 0;
   x = -1;
-  while (s[i] == ' ' || s[i] == '\t')
+  while (s[i] && (s[i] == ' ' || s[i] == '\t'))
     ++i;
+  if (s[i] == '\0')
+    return (NULL);
   while (s[i])
     {
       s[++x] = s[i];

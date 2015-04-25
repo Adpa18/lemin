@@ -5,7 +5,7 @@
 ** Login   <wery_a@epitech.net>
 ** 
 ** Started on  Fri Apr 24 20:54:09 2015 Adrien WERY
-** Last update Sat Apr 25 18:15:40 2015 Adrien WERY
+** Last update Sat Apr 25 19:31:26 2015 Adrien WERY
 */
 
 #include "lem_in.h"
@@ -38,8 +38,12 @@ void	my_putnbr(int nb)
 
 int     my_error(char *s, int error)
 {
-  my_str(s, 1);
-  write(1, "\n", 1);
+  int	i;
+
+  i = -1;
+  while (s[++i])
+    write(2, &s[i], 1);
+  write(2, "\n", 1);
   return (error);
 }
 
