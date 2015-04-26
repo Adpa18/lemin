@@ -5,7 +5,7 @@
 ** Login   <wery_a@epitech.net>
 ** 
 ** Started on  Fri Apr  3 17:46:37 2015 adrien wery
-** Last update Sat Apr 25 20:17:44 2015 Adrien WERY
+** Last update Sun Apr 26 16:47:46 2015 Adrien WERY
 */
 
 #include <sys/stat.h>
@@ -35,6 +35,7 @@ typedef struct	lem_s
   char		**paths;
   char		*start;
   char		*end;
+  int		nb_ant;
 }		lem_t;
 
 /* STR_WRITE FUNCTIONS */

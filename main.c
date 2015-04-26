@@ -5,7 +5,7 @@
 ** Login   <wery_a@epitech.net>
 ** 
 ** Started on  Fri Apr  3 17:32:29 2015 adrien wery
-** Last update Sat Apr 25 20:21:22 2015 Adrien WERY
+** Last update Sun Apr 26 16:55:26 2015 Adrien WERY
 */
 
 #include <stdio.h>
@@ -68,6 +68,7 @@ int	check_struct(lem_t *lem)
     return (my_error("No ##start in the file", -1));
   if (!lem->end)
     return (my_error("No ##end in the file", -1));
+  printf("start = %s\tend = %s\tnb_ant = %d\n", lem->start, lem->end, lem->nb_ant);
   rooms = 0;
   paths = 0;
   show(lem->room, lem->link, &rooms, &paths);
@@ -82,6 +83,8 @@ int	get_struct(int fd, lem_t *lem)
 {
   char	*s;
 
+  if ((lem->nb_ant = my_getnbr_base(epur_str(get_next_line(fd)), "0123456789")) < 0)
+    return (my_error("I need some ants to play", -1));
   while ((s = epur_str(get_next_line(fd))))
     {
       if (my_strcmp("##start", s) == 0)

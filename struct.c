@@ -5,7 +5,7 @@
 ** Login   <wery_a@epitech.net>
 ** 
 ** Started on  Sat Apr 25 15:05:35 2015 Adrien WERY
-** Last update Sat Apr 25 20:14:59 2015 Adrien WERY
+** Last update Sun Apr 26 16:48:58 2015 Adrien WERY
 */
 
 #include "lem_in.h"
@@ -29,6 +29,9 @@ lem_t	*init_lem()
       my_error("struct.c : 27 Malloc Failed", -1);
       return (NULL);
     }
+  lem->start = NULL;
+  lem->end = NULL;
+  lem->nb_ant = 0;
   lem->room->name = NULL;
   lem->room->x = 0;
   lem->room->y = 0;
