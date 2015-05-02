@@ -5,7 +5,7 @@
 ** Login   <wery_a@epitech.net>
 ** 
 ** Started on  Sat Apr 25 15:05:35 2015 Adrien WERY
-** Last update Sat May  2 22:38:04 2015 consta_n
+** Last update Sat May  2 22:52:31 2015 consta_n
 */
 
 #include "lem_in.h"
@@ -46,6 +46,7 @@ int		add_room(room_t **rooms, char *name, char cmd)
   else
     room->weight = 0;
   room->road = 0;
+  room->ant = NULL;
   room->next = *rooms;
   *rooms = room;
   return (0);

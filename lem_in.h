@@ -5,7 +5,7 @@
 ** Login   <wery_a@epitech.net>
 ** 
 ** Started on  Fri Apr  3 17:46:37 2015 adrien wery
-** Last update Sat May  2 22:38:24 2015 consta_n
+** Last update Sat May  2 22:51:51 2015 consta_n
 */
 
 #include <sys/stat.h>
@@ -26,6 +26,7 @@ typedef struct		room_s
   char			*name;
   int			weight;
   char			road;
+  char			*ant;
   struct room_s		*next;
 }			room_t;
 
