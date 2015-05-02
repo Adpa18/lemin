@@ -5,7 +5,7 @@
 ** Login   <wery_a@epitech.net>
 ** 
 ** Started on  Fri Apr  3 17:32:29 2015 adrien wery
-** Last update Sat May  2 20:55:29 2015 consta_n
+** Last update Sat May  2 22:36:16 2015 consta_n
 */
 
 #include <stdio.h>
@@ -48,8 +48,7 @@ char	*check_line(char *s, room_t **room, link_t **link, char cmd)
     }
   if (tab[0] && tab[1] && tab[2])
     {
-      if ((add_room(room, tab[0], my_getnbr_base(tab[1], "0123456789"),
-		    my_getnbr_base(tab[2], "0123456789")) == -1)
+      if ((add_room(room, tab[0], cmd) == -1)
 	  || ((name = my_strdup(tab[0])) == NULL))
 	return (NULL);
     }
@@ -57,7 +56,7 @@ char	*check_line(char *s, room_t **room, link_t **link, char cmd)
     return (NULL);
   free_double(tab);
   free(s);
-  if (cmd == 1)
+  if (cmd == 1 || cmd == 2)
     return (name);
   free(name);
   return ("good");
@@ -102,7 +101,7 @@ int	get_struct(int fd, lem_t *lem)
 	{
 	  free(s);
 	  s = epur_str(get_next_line(fd));
-	  if ((lem->end = check_line(s, &(lem->room), &(lem->link), 1)) == NULL)
+	  if ((lem->end = check_line(s, &(lem->room), &(lem->link), 2)) == NULL)
 	    return (-1);
 	}
       else if (check_line(s, &(lem->room), &(lem->link), 0) == NULL)

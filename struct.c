@@ -5,7 +5,7 @@
 ** Login   <wery_a@epitech.net>
 ** 
 ** Started on  Sat Apr 25 15:05:35 2015 Adrien WERY
-** Last update Sat May  2 20:12:26 2015 consta_n
+** Last update Sat May  2 22:38:04 2015 consta_n
 */
 
 #include "lem_in.h"
@@ -28,28 +28,26 @@ lem_t	*init_lem()
   lem->end = NULL;
   lem->nb_ant = 0;
   lem->room->name = NULL;
-  lem->room->x = 0;
-  lem->room->y = 0;
   lem->room->next = NULL;
   lem->link = NULL;
   return (lem);
 }
 
-int		add_room(room_t **rooms, char *name, int x, int y)
+int		add_room(room_t **rooms, char *name, char cmd)
 {
   room_t        *room;
-  static int	i = 0;
 
   if ((room = malloc(sizeof(room_t))) == NULL)
     return (my_error("struct.c : 45 Malloc Failed -> add_room", -1));
   if ((room->name = my_strdup(name)) == NULL)
     return (my_error("struct.c : 47 my_strdup Failed -> add_room", -1));
-  room->x = x;
-  room->y = y;
-  room->id = i;
+  if (cmd == 1)
+    room->weight = -1;
+  else
+    room->weight = 0;
+  room->road = 0;
   room->next = *rooms;
   *rooms = room;
-  i++;
   return (0);
 }
 
@@ -79,12 +77,6 @@ void    show(room_t *room, link_t *link, int *rooms, int *paths)
     {
       my_str("name = ", 1);
       my_str(tmp1->name, 1);
-      my_str("\tx = ", 1);
-      my_putnbr(tmp1->x);
-      my_str("\ty = ", 1);
-      my_putnbr(tmp1->y);
-      my_str(" id = ", 1);
-      my_putnbr(tmp1->id);
       write(1, "\n", 1);
       tmp1 = tmp1->next;
       ++(*rooms);

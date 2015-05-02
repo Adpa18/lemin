@@ -5,7 +5,7 @@
 ** Login   <wery_a@epitech.net>
 ** 
 ** Started on  Fri Apr  3 17:46:37 2015 adrien wery
-** Last update Sat May  2 21:46:53 2015 consta_n
+** Last update Sat May  2 22:38:24 2015 consta_n
 */
 
 #include <sys/stat.h>
@@ -24,9 +24,8 @@ typedef struct		link_s
 typedef struct		room_s
 {
   char			*name;
-  int			x;
-  int			y;
-  int			id;
+  int			weight;
+  char			road;
   struct room_s		*next;
 }			room_t;
 
@@ -78,7 +77,7 @@ char    *my_re_alloc(char *s);
 
 /* STRUCT FUNCTIONS */
 lem_t   *init_lem();
-int	add_room(room_t **rooms, char *name, int x, int y);
+int	add_room(room_t **rooms, char *name, char cmd);
 int     add_link(link_t **links, char *room1, char *room2);
 void    show(room_t *room, link_t *link, int *rooms, int *paths);
 void	free_struct(lem_t *lem);
