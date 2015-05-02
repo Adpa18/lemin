@@ -5,7 +5,7 @@
 ** Login   <wery_a@epitech.net>
 ** 
 ** Started on  Sat Apr 25 15:05:35 2015 Adrien WERY
-** Last update Sun Apr 26 16:48:58 2015 Adrien WERY
+** Last update Sat May  2 20:12:26 2015 consta_n
 */
 
 #include "lem_in.h"
@@ -24,11 +24,6 @@ lem_t	*init_lem()
       my_error("struct.c : 22 Malloc Failed", -1);
       return (NULL);
     }
-  if ((lem->link = malloc(sizeof(link_t))) == NULL)
-    {
-      my_error("struct.c : 27 Malloc Failed", -1);
-      return (NULL);
-    }
   lem->start = NULL;
   lem->end = NULL;
   lem->nb_ant = 0;
@@ -36,14 +31,14 @@ lem_t	*init_lem()
   lem->room->x = 0;
   lem->room->y = 0;
   lem->room->next = NULL;
-  lem->link->room1 = NULL;
-  lem->link->room2 = NULL;
+  lem->link = NULL;
   return (lem);
 }
 
 int		add_room(room_t **rooms, char *name, int x, int y)
 {
   room_t        *room;
+  static int	i = 0;
 
   if ((room = malloc(sizeof(room_t))) == NULL)
     return (my_error("struct.c : 45 Malloc Failed -> add_room", -1));
@@ -51,8 +46,10 @@ int		add_room(room_t **rooms, char *name, int x, int y)
     return (my_error("struct.c : 47 my_strdup Failed -> add_room", -1));
   room->x = x;
   room->y = y;
+  room->id = i;
   room->next = *rooms;
   *rooms = room;
+  i++;
   return (0);
 }
 
@@ -86,6 +83,8 @@ void    show(room_t *room, link_t *link, int *rooms, int *paths)
       my_putnbr(tmp1->x);
       my_str("\ty = ", 1);
       my_putnbr(tmp1->y);
+      my_str(" id = ", 1);
+      my_putnbr(tmp1->id);
       write(1, "\n", 1);
       tmp1 = tmp1->next;
       ++(*rooms);
@@ -101,15 +100,48 @@ void    show(room_t *room, link_t *link, int *rooms, int *paths)
     }
 }
 
-void	free_struct(lem_t *lem)
+void		free_room(room_t *room)
 {
-  while (lem->room)
+  room_t	*mem;
+
+  mem = room;
+  while (room)
     {
-      free(lem->room->name);
-      free(lem->room);
-      lem->room = lem->room->next;
+      mem = room;
+      if (room->name)
+	free(room->name);
+      room = room->next;
+      if (mem)
+	free(mem);
     }
-  free(lem->start);
-  free(lem->end);
-  free(lem);
+}
+
+void		free_link(link_t *link)
+{
+  link_t	*mem;
+
+  mem = link;
+  while (link)
+    {
+      mem = link;
+      if (link->room1)
+	free(link->room1);
+      if (link->room2)
+	free(link->room2);
+      link = link->next;
+      if (mem)
+	free(mem);
+    }
+}
+
+void		free_struct(lem_t *lem)
+{
+  free_room(lem->room);
+  free_link(lem->link);
+  if (lem->start)
+    free(lem->start);
+  if (lem->end)
+    free(lem->end);
+  if (lem)
+    free(lem);
 }

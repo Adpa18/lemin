@@ -5,13 +5,14 @@
 ** Login   <wery_a@epitech.net>
 ** 
 ** Started on  Fri Apr  3 17:46:37 2015 adrien wery
-** Last update Sun Apr 26 16:47:46 2015 Adrien WERY
+** Last update Sat May  2 20:24:53 2015 consta_n
 */
 
 #include <sys/stat.h>
 #include <fcntl.h>
 #include <unistd.h>
 #include <stdlib.h>
+# define BUFF_SIZE 1024
 
 typedef struct	link_s
 {
@@ -25,6 +26,7 @@ typedef struct	room_s
   char		*name;
   int		x;
   int		y;
+  int		id;
   struct room_s	*next;
 }		room_t;
 
@@ -69,3 +71,9 @@ void	free_struct(lem_t *lem);
 /* CAN GO FUNCTIONS */
 void    display_can_go(char *room1, char *room2, int go);
 int     can_go(link_t *link, char *room1, char *room2);
+
+int	**weight_tab(room_t *rooms);
+int	**ant_tab(room_t *rooms);
+int	lem_in(lem_t *lem);
+void	free_tab(int **tab);
+char	*my_alloc(int size);

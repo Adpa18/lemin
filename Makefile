@@ -5,16 +5,20 @@
 ## Login   <wery_a@epitech.net>
 ## 
 ## Started on  Tue Feb  3 16:12:36 2015 adrien wery
-## Last update Sat Apr 25 19:42:15 2015 Adrien WERY
+## Last update Sat May  2 20:22:23 2015 consta_n
 ##
 
 SRC	= main.c 		\
 	  str_write.c		\
-	  str_op.c		\
 	  get.c			\
+	  str_op.c		\
+	  my_get_next_line.c	\
 	  struct.c		\
 	  str_to_wordtab.c	\
 	  can_go.c		\
+	  set_tab.c		\
+	  free.c		\
+	  lem_in.c
 
 CC	= gcc -g
 

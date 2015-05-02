@@ -5,7 +5,7 @@
 ** Login   <wery_a@epitech.net>
 ** 
 ** Started on  Sat Apr 25 15:27:15 2015 Adrien WERY
-** Last update Sat Apr 25 20:03:25 2015 Adrien WERY
+** Last update Sat May  2 20:51:33 2015 consta_n
 */
 
 #include "lem_in.h"
@@ -54,7 +54,7 @@ char	**my_str_to_wordtab(char *s, char sp, int i)
 	  ++y;
 	  x = 0;
 	}
-      if ((tab[y] = my_malloc((word_len(s + i, sp) + 1))) == NULL)
+      if ((tab[y] = my_alloc((word_len(s + i, sp) + 1))) == NULL)
 	return (NULL);
       while (s[i] != '\0' && s[i] != sp && s[i] != '\n')
 	tab[y][x++] = s[i++];
