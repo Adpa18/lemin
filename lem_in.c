@@ -5,21 +5,19 @@
 ** Login   <consta_n@epitech.net>
 ** 
 ** Started on  Sat May  2 19:09:43 2015 consta_n
-** Last update Sat May  2 20:01:01 2015 consta_n
+** Last update Sat May  2 21:43:49 2015 consta_n
 */
 
 #include "lem_in.h"
 
-int	lem_in(lem_t *lem)
+int		lem_in(lem_t *lem)
 {
-  int	**wtab;
-  int	**atab;
+  t_weight	*weight;
+  t_ant		*ant;
 
-  if (!(wtab = weight_tab(lem->room)))
+  if (!(init_weight(lem->room, &weight)))
     return (1);
-  if (!(atab = ant_tab(lem->room)))
+  if (!(init_ant(lem->room, &ant)))
     return (1);
-  free_tab(wtab);
-  free_tab(atab);
   return (0);
 }

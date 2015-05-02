@@ -5,7 +5,7 @@
 ## Login   <wery_a@epitech.net>
 ## 
 ## Started on  Tue Feb  3 16:12:36 2015 adrien wery
-## Last update Sat May  2 20:22:23 2015 consta_n
+## Last update Sat May  2 21:27:22 2015 consta_n
 ##
 
 SRC	= main.c 		\
@@ -17,6 +17,7 @@ SRC	= main.c 		\
 	  str_to_wordtab.c	\
 	  can_go.c		\
 	  set_tab.c		\
+	  add_node.c		\
 	  free.c		\
 	  lem_in.c
 
