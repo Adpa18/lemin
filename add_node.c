@@ -5,7 +5,7 @@
 ** Login   <consta_n@epitech.net>
 ** 
 ** Started on  Sat May  2 21:18:48 2015 consta_n
-** Last update Sat May  2 21:52:33 2015 consta_n
+** Last update Sun May  3 15:45:56 2015 axel vencatareddy
 */
 
 #include "lem_in.h"
@@ -25,8 +25,8 @@ int		add_ant(t_ant **ant, char *name)
 
 int		add_weight(t_weight **weight, char *name)
 {
-  t_weight	*node;
   static int	a = 0;
+  t_weight	*node;
 
   if ((node = malloc(sizeof(t_weight))) == NULL)
     return (my_error("struct.c : 60 Malloc Failed", -1));

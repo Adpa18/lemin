@@ -5,12 +5,19 @@
 ## Login   <wery_a@epitech.net>
 ## 
 ## Started on  Tue Feb  3 16:12:36 2015 adrien wery
-## Last update Sat May  2 21:27:22 2015 consta_n
+## Last update Sun May  3 15:54:50 2015 axel vencatareddy
 ##
 
-SRC	= main.c 		\
+CC	= gcc -g
+
+RM	= rm -f
+
+CFLAGS	= -W -Wall -Wextra -ansi -pedantic
+
+SRCS	= main.c 		\
 	  str_write.c		\
 	  get.c			\
+	  math.c		\
 	  str_op.c		\
 	  my_get_next_line.c	\
 	  struct.c		\
@@ -19,29 +26,24 @@ SRC	= main.c 		\
 	  set_tab.c		\
 	  add_node.c		\
 	  free.c		\
+	  error.c		\
 	  lem_in.c
-
-CC	= gcc -g
-
-RM	= rm -f
-
-CFLAGS	= -W -Wall -Wextra
 
 NAME	= lem_in
 
-OBJ	= $(SRC:.c=.o)
+OBJS	= $(SRCS:.c=.o)
 
-$(NAME): $(OBJ)
-	$(CC) $(OBJ) -o $(NAME) $(LFLAGS)
+$(NAME):  $(OBJS)
+	  $(CC) $(OBJS) -o $(NAME)
 
-all: $(NAME)
+all:	  $(NAME)
 
 clean:
-	$(RM) $(OBJ) *~ *#
+	  $(RM) $(OBJS) *~ *#
 
-fclean: clean
-	$(RM) $(NAME)
+fclean:   clean
+	  $(RM) $(NAME)
 
-re: fclean all
+re:	  fclean all
 
 .PHONY: all clean fclean re

@@ -5,14 +5,14 @@
 ** Login   <wery_a@epitech.net>
 ** 
 ** Started on  Sat Apr 25 15:05:35 2015 Adrien WERY
-** Last update Sat May  2 22:52:31 2015 consta_n
+** Last update Sun May  3 15:05:33 2015 axel vencatareddy
 */
 
 #include "lem_in.h"
 
-lem_t	*init_lem()
+lem_t		*init_lem()
 {
-  lem_t	*lem;
+  lem_t		*lem;
 
   if ((lem = malloc(sizeof(lem_t))) == NULL)
     {
@@ -67,7 +67,7 @@ int		add_link(link_t **links, char *room1, char *room2)
   return (0);
 }
 
-void    show(room_t *room, link_t *link, int *rooms, int *paths)
+void		show(room_t *room, link_t *link, int *rooms, int *paths)
 {
   room_t        *tmp1;
   link_t        *tmp2;
@@ -91,50 +91,4 @@ void    show(room_t *room, link_t *link, int *rooms, int *paths)
       tmp2 = tmp2->next;
       ++(*paths);
     }
-}
-
-void		free_room(room_t *room)
-{
-  room_t	*mem;
-
-  mem = room;
-  while (room)
-    {
-      mem = room;
-      if (room->name)
-	free(room->name);
-      room = room->next;
-      if (mem)
-	free(mem);
-    }
-}
-
-void		free_link(link_t *link)
-{
-  link_t	*mem;
-
-  mem = link;
-  while (link)
-    {
-      mem = link;
-      if (link->room1)
-	free(link->room1);
-      if (link->room2)
-	free(link->room2);
-      link = link->next;
-      if (mem)
-	free(mem);
-    }
-}
-
-void		free_struct(lem_t *lem)
-{
-  free_room(lem->room);
-  free_link(lem->link);
-  if (lem->start)
-    free(lem->start);
-  if (lem->end)
-    free(lem->end);
-  if (lem)
-    free(lem);
 }

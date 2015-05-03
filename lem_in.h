@@ -5,15 +5,23 @@
 ** Login   <wery_a@epitech.net>
 ** 
 ** Started on  Fri Apr  3 17:46:37 2015 adrien wery
-** Last update Sat May  2 22:51:51 2015 consta_n
+** Last update Sun May  3 15:51:51 2015 axel vencatareddy
 */
 
-#include <sys/stat.h>
-#include <fcntl.h>
-#include <unistd.h>
-#include <stdlib.h>
+#ifndef LEM_IN_H_
+# define LEM_IN_H_
+
+/* INCLUDES */
+# include <sys/stat.h>
+# include <fcntl.h>
+# include <unistd.h>
+# include <stdlib.h>
+# include <stdio.h>
+
+/* DEFINES */
 # define BUFF_SIZE 1024
 
+/* STRUCTS */
 typedef struct		link_s
 {
   char			*room1;
@@ -59,8 +67,11 @@ typedef struct		s_ant
 void    my_putchar(char c);
 int     my_str(char *s, int mode);
 void    my_putnbr(int nb);
-int	my_error(char *s, int error);
 void	free_double(char **tab);
+
+/* ERROR FUNCTIONS */
+int	my_error(char *str, int error);
+char	*my_str_error(char *str, char *error);
 
 /* STR_OP FUNCTIONS */
 int     my_strcmp(char *s1, char *s2);
@@ -69,7 +80,7 @@ char    *my_strdup(char *s);
 void    my_memset(char *s, char c, int size);
 char	*epur_str(char *s);
 
-/* GET && MALLOC FUNCTIONS */
+/* MATH && MALLOC FUNCTIONS */
 char    **my_str_to_wordtab(char *s, char sp, int i);
 char	*get_next_line(int fd);
 int     my_getnbr_base(char *s, char *base);
@@ -87,6 +98,14 @@ void	free_struct(lem_t *lem);
 void    display_can_go(char *room1, char *room2, int go);
 int     can_go(link_t *link, char *room1, char *room2);
 
+/* GET FUNCTIONS */
+int	get_path(room_t **room, link_t **link, char **tab);
+int	get_struct(int fd, lem_t *lem);
+
+/* MAIN FUNCTIONS */
+char	*check_line(char *s, room_t **room, link_t **link, char cmd);
+int	check_struct(lem_t *lem);
+
 int	init_weight(room_t *rooms, t_weight **weight);
 int	init_ant(room_t *rooms, t_ant **ant);
 int	add_weight(t_weight **weight, char *name);
@@ -94,3 +113,5 @@ int	add_ant(t_ant **ant, char *name);
 int	lem_in(lem_t *lem);
 void	free_tab(int **tab);
 char	*my_alloc(int size);
+
+#endif /* !LEM_IN_H_ */

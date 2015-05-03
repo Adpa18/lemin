@@ -5,8 +5,10 @@
 ** Login   <vencat_a@epitech.net>
 ** 
 ** Started on  Sat May  2 17:48:21 2015 axel vencatareddy
-** Last update Sat May  2 18:56:33 2015 axel vencatareddy
+** Last update Sun May  3 16:12:42 2015 axel vencatareddy
 */
+
+#include "lem_in.h"
 
 void		init_djikstra(char **graph, int ind_beg, int *dist, int *prev)
 {

@@ -5,17 +5,15 @@
 ** Login   <consta_n@epitech.net>
 ** 
 ** Started on  Sun Dec 21 19:35:08 2014 Nicolas Constanty
-** Last update Sat May  2 20:25:45 2015 consta_n
+** Last update Sun May  3 16:16:27 2015 axel vencatareddy
 */
 
-#include <stdlib.h>
-#include <unistd.h>
 #include "lem_in.h"
 
-char	*my_alloc(int len)
+char		*my_alloc(int len)
 {
-  char	*str;
-  int	cpt;
+  char		*str;
+  int		cpt;
 
   cpt = 0;
   if (len == 0)
@@ -31,9 +29,9 @@ char	*my_alloc(int len)
   return (str);
 }
 
-int	my_read(int fd, char *buffer, int *buffer_i)
+int		my_read(int fd, char *buffer, int *buffer_i)
 {
-  int	nb_read;
+  int		nb_read;
 
   *buffer_i = 0;
   nb_read = read(fd, buffer, BUFF_SIZE);
