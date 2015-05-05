@@ -5,7 +5,7 @@
 ** Login   <wery_a@epitech.net>
 ** 
 ** Started on  Fri Apr  3 17:46:37 2015 adrien wery
-** Last update Tue May  5 02:35:33 2015 consta_n
+** Last update Tue May  5 03:41:32 2015 consta_n
 */
 
 #ifndef LEM_IN_H_
@@ -33,6 +33,7 @@ typedef struct		s_path
 {
   char			*name;
   struct s_path		*next;
+  struct s_path		*prev;
 }			t_path;
 
 typedef struct		room_s

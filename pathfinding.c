@@ -5,20 +5,49 @@
 ** Login   <vezia_l@epitech.net>
 ** 
 ** Started on  Sat May  2 20:26:22 2015 louis vezia
-** Last update Tue May  5 03:04:32 2015 axel vencatareddy
+** Last update Tue May  5 05:19:45 2015 consta_n
 */
 
 #include "lem_in.h"
 
-void		display(t_path *path)
+void		display(lem_t *lem, t_path *path, int nb_ant)
 {
   t_path	*tmp;
+  int		i;
+  int		j;
+  int		x;
+  char		*name;
 
   tmp = path;
-  while (tmp)
+  j = 2;
+  x = 1;
+  i = 1;
+  while (x <= nb_ant && tmp)
     {
-      printf("path->name = %s\n", tmp->name);
+      name = tmp->name;
+      i = x;
+      while (i < j)
+	{
+	  printf("P%d-%s ", i, name);
+	  name = NULL;
+	  if (tmp->prev)
+	    name = tmp->prev->name;
+	  else
+	    name = lem->end;
+	  printf("%s\n", name);
+	  if (!my_strcmp(name, lem->end))
+	    {
+	      ++x;
+	      tmp = path;
+	      name = tmp->name;
+	    }
+	  ++i;
+	}
+      printf("\n");
       tmp = tmp->next;
+      if (!tmp && x != nb_ant)
+	tmp = path;
+      ++j;
     }
 }
 
@@ -54,7 +83,7 @@ void		display_path(lem_t *lem)
       tmp = tmp1;
       tmp1 = lem->room;
     }
-  display(path);
+  display(lem, path, lem->nb_ant);
 }
 
 void		calc_weight(room_t *parent, room_t *child)

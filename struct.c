@@ -5,7 +5,7 @@
 ** Login   <wery_a@epitech.net>
 ** 
 ** Started on  Sat Apr 25 15:05:35 2015 Adrien WERY
-** Last update Tue May  5 02:41:06 2015 consta_n
+** Last update Tue May  5 03:48:23 2015 consta_n
 */
 
 #include "lem_in.h"
@@ -70,12 +70,16 @@ int		add_link(link_t **links, char *room1, char *room2)
 int		add_path(t_path **paths, char *name)
 {
   t_path        *path;
+  static int	i = 0;
 
   if ((path = malloc(sizeof(t_path))) == NULL)
     return (my_error("struct.c : 60 Malloc Failed", -1));
   path->name = name;
   path->next = *paths;
+  if (i)
+    path->next->prev = path;
   *paths = path;
+  i = 1;
   return (0);
 }
 
