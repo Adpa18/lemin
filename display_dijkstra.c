@@ -5,12 +5,12 @@
 ** Login   <vencat_a@epitech.net>
 ** 
 ** Started on  Tue May  5 08:44:22 2015 axel vencatareddy
-** Last update Tue May  5 09:28:17 2015 axel vencatareddy
+** Last update Tue May  5 13:38:10 2015 consta_n
 */
 
 #include "lem_in.h"
 
-int             disp_turn(t_six_int *t, char **name, t_lem *lem, t_path **tmp)
+int		disp_turn(t_six_int *t, char **name, t_lem *lem, t_path **tmp)
 {
   while (t->i < t->j)
     {
@@ -37,7 +37,7 @@ int             disp_turn(t_six_int *t, char **name, t_lem *lem, t_path **tmp)
   return (0);
 }
 
-int             display_the_after_turns(t_six_int *t, t_path **tmp)
+int		display_the_after_turns(t_six_int *t, t_path **tmp)
 {
   while (t->save > 0)
     {
@@ -55,7 +55,7 @@ int             display_the_after_turns(t_six_int *t, t_path **tmp)
   return (0);
 }
 
-int             display(t_lem *lem, t_path *path, int nb_ant)
+int		display(t_lem *lem, t_path *path, int nb_ant)
 {
   t_path        *tmp;
   t_six_int     t;
@@ -82,7 +82,7 @@ int             display(t_lem *lem, t_path *path, int nb_ant)
   return (0);
 }
 
-void            find_lem_end(t_room **tmp, t_lem *lem)
+void		find_lem_end(t_room **tmp, t_lem *lem)
 {
   while (*tmp)
     {

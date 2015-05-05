@@ -5,12 +5,12 @@
 ** Login   <wery_a@epitech.net>
 ** 
 ** Started on  Sat Apr 25 19:40:55 2015 Adrien WERY
-** Last update Tue May  5 07:48:49 2015 axel vencatareddy
+** Last update Tue May  5 13:37:34 2015 consta_n
 */
 
 #include "lem_in.h"
 
-int     can_go(t_link *link, char *room1, char *room2)
+int	can_go(t_link *link, char *room1, char *room2)
 {
   while (link)
     {
