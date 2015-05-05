@@ -5,7 +5,7 @@
 ** Login   <consta_n@epitech.net>
 ** 
 ** Started on  Sun Dec 21 19:35:08 2014 Nicolas Constanty
-** Last update Sun May  3 16:16:27 2015 axel vencatareddy
+** Last update Tue May  5 09:30:41 2015 axel vencatareddy
 */
 
 #include "lem_in.h"
@@ -46,8 +46,8 @@ int		my_read(int fd, char *buffer, int *buffer_i)
 char		*get_next_line(int fd)
 {
   static char	buffer[BUFF_SIZE];
-  static int	buffer_i;
   static int	nb_read = -1;
+  static int	buffer_i = 0;
   char		*str;
   int		i;
 

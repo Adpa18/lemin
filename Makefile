@@ -5,7 +5,7 @@
 ## Login   <wery_a@epitech.net>
 ## 
 ## Started on  Tue Feb  3 16:12:36 2015 adrien wery
-## Last update Tue May  5 03:45:37 2015 axel vencatareddy
+## Last update Tue May  5 09:02:10 2015 axel vencatareddy
 ##
 
 CC	= gcc -g
@@ -28,6 +28,8 @@ SRCS	= main.c 		\
 	  free.c		\
 	  error.c		\
 	  pathfinding.c		\
+	  show_result.c		\
+	  display_dijkstra.c	\
 
 NAME	= lem_in
 

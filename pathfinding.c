@@ -5,86 +5,12 @@
 ** Login   <vezia_l@epitech.net>
 ** 
 ** Started on  Sat May  2 20:26:22 2015 louis vezia
-** Last update Tue May  5 08:19:10 2015 axel vencatareddy
+** Last update Tue May  5 08:45:24 2015 axel vencatareddy
 */
 
 #include "lem_in.h"
 
-void		display_the_turns(t_six_int *t, char **name, t_lem *lem, t_path **tmp)
-{
-  while (t->i < t->j)
-    {
-      printf("P%d-%s", t->i, *name);
-      if (t->i + 1 < t->j)
-	printf(" ");
-      if (!my_strcmp(*name, lem->end))
-	t->test = 1;
-      if ((*tmp)->prev)
-	{
-	  t->save++;
-	  t->save_while = 1;
-	  while (t->save_while > 0)
-	    {
-	      *tmp = (*tmp)->prev;
-	      t->save_while--;
-	    }
-	  *name = (*tmp)->name;
-	}
-      t->i++;
-    }
-}
-
-void		display_the_after_turns(t_six_int *t, t_path **tmp, t_path *path)
-{
-  while (t->save > 0)
-    {
-      *tmp = (*tmp)->next;
-      t->save--;
-    }
-  if (t->test == 1)
-    {
-      t->x++;
-      t->test = 0;
-      *tmp = (*tmp)->prev;
-    }
-  printf("\n");
-}
-
-void		display(t_lem *lem, t_path *path, int nb_ant)
-{
-  t_path	*tmp;
-  t_six_int	t;
-  char		*name;
-
-  tmp = path;
-  t.j = 2;
-  t.x = 1;
-  t.test = 0;
-  t.save = 0;
-  while (t.x <= nb_ant && tmp)
-    {
-      name = tmp->name;
-      t.i = t.x;
-      display_the_turns(&t, &name, lem, &tmp);
-      display_the_after_turns(&t, &tmp, path);
-      if (tmp && tmp->next)
-	tmp = tmp->next;
-      if (t.j < nb_ant + 1)
-	t.j++;
-    }
-}
-
-void		find_lem_end(t_room **tmp, t_lem *lem)
-{
-  while (*tmp)
-    {
-      if (!my_strcmp(lem->end, (*tmp)->name))
-	break;
-      *tmp = (*tmp)->next;
-    }
-}
-
-void		display_path(t_lem *lem)
+int		display_path(t_lem *lem)
 {
   t_room	*tmp;
   t_room	*tmp1;
@@ -109,7 +35,7 @@ void		display_path(t_lem *lem)
       tmp = tmp1;
       tmp1 = lem->room;
     }
-  display(lem, path, lem->nb_ant);
+  return (display(lem, path, lem->nb_ant));
 }
 
 void		calc_weight(t_room *parent, t_room *child)
@@ -145,7 +71,7 @@ t_room		*set_parent(t_room *rooms)
   return (tmp);
 }
 
-void		pathfinding(t_lem *lem)
+int		pathfinding(t_lem *lem)
 {
   t_room	*tmp_r1;
   t_room	*tmp_r2;
@@ -170,5 +96,5 @@ void		pathfinding(t_lem *lem)
       tmp_r1->road = 1;
       tmp_r1 = set_parent(lem->room);
     }
-  display_path(lem);
+  return (display_path(lem));
 }

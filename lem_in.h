@@ -5,7 +5,7 @@
 ** Login   <wery_a@epitech.net>
 ** 
 ** Started on  Fri Apr  3 17:46:37 2015 adrien wery
-** Last update Tue May  5 08:06:46 2015 axel vencatareddy
+** Last update Tue May  5 09:27:03 2015 axel vencatareddy
 */
 
 #ifndef LEM_IN_H_
@@ -123,6 +123,11 @@ int	get_struct(int fd, t_lem *lem);
 char	*check_line(char *s, t_room **room, t_link **link, char cmd);
 int	check_struct(t_lem *lem);
 
+/* DISPLAY FUNCTIONS */
+void	find_lem_end(t_room **tmp, t_lem *lem);
+int	display(t_lem *lem, t_path *path, int nb_ant);
+int	show_result(char *file, t_lem *lem);
+
 int	init_weight(t_room *rooms, t_weight **weight);
 int	init_ant(t_room *rooms, t_ant **ant);
 int	add_weight(t_weight **weight, char *name);
@@ -131,7 +136,7 @@ int	lem_in(t_lem *lem);
 void	free_tab(int **tab);
 char	*my_alloc(int size);
 int	my_strcmp(char *s1, char *s2);
-void	pathfinding(t_lem *lem);
+int	pathfinding(t_lem *lem);
 int	add_path(t_path **path, char *name);
 
 #endif /* !LEM_IN_H_ */

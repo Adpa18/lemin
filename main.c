@@ -5,7 +5,7 @@
 ** Login   <wery_a@epitech.net>
 ** 
 ** Started on  Fri Apr  3 17:32:29 2015 adrien wery
-** Last update Tue May  5 07:53:08 2015 axel vencatareddy
+** Last update Tue May  5 09:23:46 2015 axel vencatareddy
 */
 
 #include "lem_in.h"
@@ -48,7 +48,6 @@ int	check_struct(t_lem *lem)
     return (my_error("No ##start in the file", -1));
   if (!lem->end)
     return (my_error("No ##end in the file", -1));
-  printf("%d\n", lem->nb_ant);
   rooms = 0;
   paths = 0;
   show(lem->room, lem->link, &rooms, &paths);
@@ -83,7 +82,8 @@ int	main(int argc, char **argv)
       free_struct(lem);
       return (1);
     }
-  pathfinding(lem);
+  if (show_result(argv[1], lem) != 0)
+    return (my_error("The program has unfortunately shutdown.", -1));
   free_struct(lem);
   return (0);
 }
