@@ -5,15 +5,15 @@
 ** Login   <vencat_a@epitech.net>
 ** 
 ** Started on  Sun May  3 15:28:27 2015 axel vencatareddy
-** Last update Sun May  3 15:48:10 2015 axel vencatareddy
+** Last update Tue May  5 07:51:44 2015 axel vencatareddy
 */
 
 #include "lem_in.h"
 
-int		get_path(room_t **room, link_t **link, char **tab)
+int		get_path(t_room **room, t_link **link, char **tab)
 {
-  room_t        *t1;
-  room_t        *t2;
+  t_room	*t1;
+  t_room	*t2;
 
   t1 = *room;
   t2 = *room;
@@ -29,7 +29,7 @@ int		get_path(room_t **room, link_t **link, char **tab)
   return (0);
 }
 
-int		get_struct(int fd, lem_t *lem)
+int		get_struct(int fd, t_lem *lem)
 {
   char		*s;
 

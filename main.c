@@ -5,12 +5,12 @@
 ** Login   <wery_a@epitech.net>
 ** 
 ** Started on  Fri Apr  3 17:32:29 2015 adrien wery
-** Last update Tue May  5 00:51:33 2015 consta_n
+** Last update Tue May  5 07:53:08 2015 axel vencatareddy
 */
 
 #include "lem_in.h"
 
-char	*check_line(char *s, room_t **room, link_t **link, char cmd)
+char	*check_line(char *s, t_room **room, t_link **link, char cmd)
 {
   char	**tab;
   char	*name;
@@ -39,7 +39,7 @@ char	*check_line(char *s, room_t **room, link_t **link, char cmd)
   return ("good");
 }
 
-int	check_struct(lem_t *lem)
+int	check_struct(t_lem *lem)
 {
   int	rooms;
   int	paths;
@@ -48,7 +48,7 @@ int	check_struct(lem_t *lem)
     return (my_error("No ##start in the file", -1));
   if (!lem->end)
     return (my_error("No ##end in the file", -1));
-  printf("start= %s\tend= %s\tnb_ant= %d\n",lem->start,lem->end,lem->nb_ant);
+  printf("%d\n", lem->nb_ant);
   rooms = 0;
   paths = 0;
   show(lem->room, lem->link, &rooms, &paths);
@@ -59,7 +59,7 @@ int	check_struct(lem_t *lem)
   return (0);
 }
 
-int	parsing(char *file, lem_t *lem)
+int	parsing(char *file, t_lem *lem)
 {
   int	fd;
 
@@ -72,7 +72,7 @@ int	parsing(char *file, lem_t *lem)
 
 int	main(int argc, char **argv)
 {
-  lem_t	*lem;
+  t_lem	*lem;
 
   if (argc != 2)
     return (my_error("\n\tUsage : ./lem_in <file_name>\n", -1));

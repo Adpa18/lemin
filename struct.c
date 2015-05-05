@@ -5,21 +5,21 @@
 ** Login   <wery_a@epitech.net>
 ** 
 ** Started on  Sat Apr 25 15:05:35 2015 Adrien WERY
-** Last update Tue May  5 03:48:23 2015 consta_n
+** Last update Tue May  5 08:07:45 2015 axel vencatareddy
 */
 
 #include "lem_in.h"
 
-lem_t		*init_lem()
+t_lem		*init_lem()
 {
-  lem_t		*lem;
+  t_lem		*lem;
 
-  if ((lem = malloc(sizeof(lem_t))) == NULL)
+  if ((lem = malloc(sizeof(t_lem))) == NULL)
     {
       my_error("struct.c : 17 Malloc Failed", -1);
       return (NULL);
     }
-  if ((lem->room = malloc(sizeof(room_t))) == NULL)
+  if ((lem->room = malloc(sizeof(t_room))) == NULL)
     {
       my_error("struct.c : 22 Malloc Failed", -1);
       return (NULL);
@@ -33,11 +33,11 @@ lem_t		*init_lem()
   return (lem);
 }
 
-int		add_room(room_t **rooms, char *name, char cmd)
+int		add_room(t_room **rooms, char *name, char cmd)
 {
-  room_t        *room;
+  t_room	*room;
 
-  if ((room = malloc(sizeof(room_t))) == NULL)
+  if ((room = malloc(sizeof(t_room))) == NULL)
     return (my_error("struct.c : 45 Malloc Failed -> add_room", -1));
   if ((room->name = my_strdup(name)) == NULL)
     return (my_error("struct.c : 47 my_strdup Failed -> add_room", -1));
@@ -52,11 +52,11 @@ int		add_room(room_t **rooms, char *name, char cmd)
   return (0);
 }
 
-int		add_link(link_t **links, char *room1, char *room2)
+int		add_link(t_link **links, char *room1, char *room2)
 {
-  link_t        *link;
+  t_link	*link;
 
-  if ((link = malloc(sizeof(link_t))) == NULL)
+  if ((link = malloc(sizeof(t_link))) == NULL)
     return (my_error("struct.c : 60 Malloc Failed", -1));
   if ((link->room1 = my_strdup(room1)) == NULL)
     return (my_error("struct.c : 62 my_strdup Failed", -1));
@@ -69,24 +69,25 @@ int		add_link(link_t **links, char *room1, char *room2)
 
 int		add_path(t_path **paths, char *name)
 {
-  t_path        *path;
+  t_path	*path;
   static int	i = 0;
 
   if ((path = malloc(sizeof(t_path))) == NULL)
     return (my_error("struct.c : 60 Malloc Failed", -1));
   path->name = name;
   path->next = *paths;
-  if (i)
+  path->prev = NULL;
+  if (i != 0)
     path->next->prev = path;
   *paths = path;
   i = 1;
   return (0);
 }
 
-void		show(room_t *room, link_t *link, int *rooms, int *paths)
+void		show(t_room *room, t_link *link, int *rooms, int *paths)
 {
-  room_t        *tmp1;
-  link_t        *tmp2;
+  t_room	*tmp1;
+  t_link	*tmp2;
 
   tmp1 = room;
   tmp2 = link;

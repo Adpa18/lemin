@@ -5,14 +5,14 @@
 ** Login   <consta_n@epitech.net>
 ** 
 ** Started on  Sat May  2 18:43:29 2015 consta_n
-** Last update Sat May  2 21:46:29 2015 consta_n
+** Last update Tue May  5 08:08:08 2015 axel vencatareddy
 */
 
 #include "lem_in.h"
 
-int		init_weight(room_t *rooms, t_weight **weight)
+int		init_weight(t_room *rooms, t_weight **weight)
 {
-  room_t	*tmp;
+  t_room	*tmp;
 
   tmp = rooms;
   while (tmp)
@@ -23,9 +23,9 @@ int		init_weight(room_t *rooms, t_weight **weight)
   return (0);
 }
 
-int		init_ant(room_t *rooms, t_ant **ant)
+int		init_ant(t_room *rooms, t_ant **ant)
 {
-  room_t	*tmp;
+  t_room	*tmp;
 
   tmp = rooms;
   while (tmp)

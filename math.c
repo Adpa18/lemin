@@ -5,15 +5,15 @@
 ** Login   <wery_a@epitech.net>
 ** 
 ** Started on  Fri Apr 24 20:26:44 2015 Adrien WERY
-** Last update Sun May  3 15:28:17 2015 axel vencatareddy
+** Last update Tue May  5 07:53:56 2015 axel vencatareddy
 */
 
 #include "lem_in.h"
 
-int     power(int nb1, int p)
+int	power(int nb1, int p)
 {
-  int   nb;
-  int   i;
+  int	nb;
+  int	i;
 
   nb = 1;
   i = -1;
@@ -22,13 +22,13 @@ int     power(int nb1, int p)
   return (nb);
 }
 
-int     my_getnbr_base(char *s, char *base)
+int	my_getnbr_base(char *s, char *base)
 {
-  int   nb;
-  short i;
-  short n;
-  short p;
-  short len;
+  int	nb;
+  short	i;
+  short	n;
+  short	p;
+  short	len;
 
   if (!s)
     return (-1);

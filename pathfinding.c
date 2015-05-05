@@ -5,68 +5,95 @@
 ** Login   <vezia_l@epitech.net>
 ** 
 ** Started on  Sat May  2 20:26:22 2015 louis vezia
-** Last update Tue May  5 05:19:45 2015 consta_n
+** Last update Tue May  5 08:19:10 2015 axel vencatareddy
 */
 
 #include "lem_in.h"
 
-void		display(lem_t *lem, t_path *path, int nb_ant)
+void		display_the_turns(t_six_int *t, char **name, t_lem *lem, t_path **tmp)
 {
-  t_path	*tmp;
-  int		i;
-  int		j;
-  int		x;
-  char		*name;
-
-  tmp = path;
-  j = 2;
-  x = 1;
-  i = 1;
-  while (x <= nb_ant && tmp)
+  while (t->i < t->j)
     {
-      name = tmp->name;
-      i = x;
-      while (i < j)
+      printf("P%d-%s", t->i, *name);
+      if (t->i + 1 < t->j)
+	printf(" ");
+      if (!my_strcmp(*name, lem->end))
+	t->test = 1;
+      if ((*tmp)->prev)
 	{
-	  printf("P%d-%s ", i, name);
-	  name = NULL;
-	  if (tmp->prev)
-	    name = tmp->prev->name;
-	  else
-	    name = lem->end;
-	  printf("%s\n", name);
-	  if (!my_strcmp(name, lem->end))
+	  t->save++;
+	  t->save_while = 1;
+	  while (t->save_while > 0)
 	    {
-	      ++x;
-	      tmp = path;
-	      name = tmp->name;
+	      *tmp = (*tmp)->prev;
+	      t->save_while--;
 	    }
-	  ++i;
+	  *name = (*tmp)->name;
 	}
-      printf("\n");
-      tmp = tmp->next;
-      if (!tmp && x != nb_ant)
-	tmp = path;
-      ++j;
+      t->i++;
     }
 }
 
-void		display_path(lem_t *lem)
+void		display_the_after_turns(t_six_int *t, t_path **tmp, t_path *path)
 {
-  room_t	*tmp;
-  room_t	*tmp1;
+  while (t->save > 0)
+    {
+      *tmp = (*tmp)->next;
+      t->save--;
+    }
+  if (t->test == 1)
+    {
+      t->x++;
+      t->test = 0;
+      *tmp = (*tmp)->prev;
+    }
+  printf("\n");
+}
+
+void		display(t_lem *lem, t_path *path, int nb_ant)
+{
+  t_path	*tmp;
+  t_six_int	t;
+  char		*name;
+
+  tmp = path;
+  t.j = 2;
+  t.x = 1;
+  t.test = 0;
+  t.save = 0;
+  while (t.x <= nb_ant && tmp)
+    {
+      name = tmp->name;
+      t.i = t.x;
+      display_the_turns(&t, &name, lem, &tmp);
+      display_the_after_turns(&t, &tmp, path);
+      if (tmp && tmp->next)
+	tmp = tmp->next;
+      if (t.j < nb_ant + 1)
+	t.j++;
+    }
+}
+
+void		find_lem_end(t_room **tmp, t_lem *lem)
+{
+  while (*tmp)
+    {
+      if (!my_strcmp(lem->end, (*tmp)->name))
+	break;
+      *tmp = (*tmp)->next;
+    }
+}
+
+void		display_path(t_lem *lem)
+{
+  t_room	*tmp;
+  t_room	*tmp1;
   t_path       	*path;
 
   tmp = lem->room;
   path = NULL;
-  while (tmp)
-    {
-      if (!my_strcmp(lem->end, tmp->name))
-	break;
-      tmp = tmp->next;
-    }
+  find_lem_end(&tmp, lem);
   tmp1 = lem->room;
-  printf("tmp->name = %s\n", tmp->name);
   add_path(&path, tmp->name);
   while (tmp1)
     {
@@ -76,7 +103,6 @@ void		display_path(lem_t *lem)
 	    break;
 	  tmp1 = tmp1->next;
 	}
-      printf("tmp1->name = %s\n", tmp1->name);
       add_path(&path, tmp1->name);
       if (!my_strcmp(tmp1->name, lem->start))
 	break;
@@ -86,7 +112,7 @@ void		display_path(lem_t *lem)
   display(lem, path, lem->nb_ant);
 }
 
-void		calc_weight(room_t *parent, room_t *child)
+void		calc_weight(t_room *parent, t_room *child)
 {
   if (child->weight != 1 &&
       (parent->weight + 1 < child->weight || child->weight == -1))
@@ -96,9 +122,9 @@ void		calc_weight(room_t *parent, room_t *child)
     }
 }
 
-room_t		*set_parent(room_t *rooms)
+t_room		*set_parent(t_room *rooms)
 {
-  room_t	*tmp;
+  t_room	*tmp;
   int		weight;
 
   weight = 0xFFFFFF;
@@ -119,10 +145,10 @@ room_t		*set_parent(room_t *rooms)
   return (tmp);
 }
 
-void		pathfinding(lem_t *lem)
+void		pathfinding(t_lem *lem)
 {
-  room_t	*tmp_r1;
-  room_t	*tmp_r2;
+  t_room	*tmp_r1;
+  t_room	*tmp_r2;
 
   tmp_r1 = lem->room;
   while (tmp_r1)
@@ -138,9 +164,7 @@ void		pathfinding(lem_t *lem)
 	{
 	  if (my_strcmp(tmp_r1->name, tmp_r2->name)
 	      && !can_go(lem->link, tmp_r1->name, tmp_r2->name))
-	    {
-	      calc_weight(tmp_r1, tmp_r2);
-	    }
+	    calc_weight(tmp_r1, tmp_r2);
 	  tmp_r2 = tmp_r2->next;
 	}
       tmp_r1->road = 1;

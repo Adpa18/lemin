@@ -5,7 +5,7 @@
 ## Login   <wery_a@epitech.net>
 ## 
 ## Started on  Tue Feb  3 16:12:36 2015 adrien wery
-## Last update Tue May  5 00:45:55 2015 consta_n
+## Last update Tue May  5 03:45:37 2015 axel vencatareddy
 ##
 
 CC	= gcc -g
@@ -28,7 +28,6 @@ SRCS	= main.c 		\
 	  free.c		\
 	  error.c		\
 	  pathfinding.c		\
-	  lem_in.c
 
 NAME	= lem_in
 

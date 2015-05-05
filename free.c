@@ -5,14 +5,14 @@
 ** Login   <consta_n@epitech.net>
 ** 
 ** Started on  Sun Apr  5 20:32:49 2015 consta_n
-** Last update Sun May  3 15:55:31 2015 axel vencatareddy
+** Last update Tue May  5 07:50:20 2015 axel vencatareddy
 */
 
 #include "lem_in.h"
 
-void            free_room(room_t *room)
+void		free_room(t_room *room)
 {
-  room_t        *mem;
+  t_room	*mem;
 
   mem = room;
   while (room)
@@ -26,9 +26,9 @@ void            free_room(room_t *room)
     }
 }
 
-void            free_link(link_t *link)
+void		free_link(t_link *link)
 {
-  link_t        *mem;
+  t_link	*mem;
 
   mem = link;
   while (link)
@@ -44,7 +44,7 @@ void            free_link(link_t *link)
     }
 }
 
-void            free_struct(lem_t *lem)
+void		free_struct(t_lem *lem)
 {
   free_room(lem->room);
   free_link(lem->link);

@@ -5,23 +5,12 @@
 ** Login   <wery_a@epitech.net>
 ** 
 ** Started on  Sat Apr 25 19:40:55 2015 Adrien WERY
-** Last update Sat Apr 25 19:41:18 2015 Adrien WERY
+** Last update Tue May  5 07:48:49 2015 axel vencatareddy
 */
 
 #include "lem_in.h"
 
-void    display_can_go(char *room1, char *room2, int go)
-{
-  my_str(room1, 1);
-  if (go == 0)
-    my_str(" can go to ", 1);
-  else
-    my_str(" can't go to ", 1);
-  my_str(room2, 1);
-  write(1, "\n", 1);
-}
-
-int     can_go(link_t *link, char *room1, char *room2)
+int     can_go(t_link *link, char *room1, char *room2)
 {
   while (link)
     {

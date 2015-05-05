@@ -5,14 +5,14 @@
 ** Login   <wery_a@epitech.net>
 ** 
 ** Started on  Sat Apr 25 15:14:13 2015 Adrien WERY
-** Last update Sat Apr 25 20:20:46 2015 Adrien WERY
+** Last update Tue May  5 07:56:44 2015 axel vencatareddy
 */
 
 #include "lem_in.h"
 
-int     my_strcmp(char *s1, char *s2)
+int	my_strcmp(char *s1, char *s2)
 {
-  int   i;
+  int	i;
 
   if (s1 == NULL || s2 == NULL)
     return (-1);
@@ -22,9 +22,9 @@ int     my_strcmp(char *s1, char *s2)
   return (s1[i] - s2[i]);
 }
 
-int     my_strncmp(char *s1, char *s2, int nb)
+int	my_strncmp(char *s1, char *s2, int nb)
 {
-  int   i;
+  int	i;
 
   if (s1 == NULL || s2 == NULL)
     return (-1);
@@ -34,11 +34,11 @@ int     my_strncmp(char *s1, char *s2, int nb)
   return (s1[i] - s2[i]);
 }
 
-char    *my_strdup(char *s)
+char	*my_strdup(char *s)
 {
-  char  *dup;
-  int   i;
-  int   size;
+  char	*dup;
+  int	i;
+  int	size;
 
   i = 0;
   size = my_str(s, 0);
@@ -57,19 +57,19 @@ char    *my_strdup(char *s)
   return (dup);
 }
 
-void    my_memset(char *s, char c, int size)
+void	my_memset(char *s, char c, int size)
 {
-  int   i;
+  int	i;
 
   i = -1;
   while (++i < size)
     s[i] = c;
 }
 
-char    *epur_str(char *s)
+char	*epur_str(char *s)
 {
-  int   i;
-  int   x;
+  int	i;
+  int	x;
 
   if (!s)
     return (NULL);
