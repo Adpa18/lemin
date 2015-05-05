@@ -5,7 +5,7 @@
 ** Login   <wery_a@epitech.net>
 ** 
 ** Started on  Sat Apr 25 15:05:35 2015 Adrien WERY
-** Last update Sun May  3 15:05:33 2015 axel vencatareddy
+** Last update Tue May  5 02:41:06 2015 consta_n
 */
 
 #include "lem_in.h"
@@ -42,9 +42,9 @@ int		add_room(room_t **rooms, char *name, char cmd)
   if ((room->name = my_strdup(name)) == NULL)
     return (my_error("struct.c : 47 my_strdup Failed -> add_room", -1));
   if (cmd == 1)
-    room->weight = -1;
-  else
     room->weight = 0;
+  else
+    room->weight = -1;
   room->road = 0;
   room->ant = NULL;
   room->next = *rooms;
@@ -64,6 +64,18 @@ int		add_link(link_t **links, char *room1, char *room2)
     return (my_error("struct.c : 62 my_strdup Failed", -1));
   link->next = *links;
   *links = link;
+  return (0);
+}
+
+int		add_path(t_path **paths, char *name)
+{
+  t_path        *path;
+
+  if ((path = malloc(sizeof(t_path))) == NULL)
+    return (my_error("struct.c : 60 Malloc Failed", -1));
+  path->name = name;
+  path->next = *paths;
+  *paths = path;
   return (0);
 }
 

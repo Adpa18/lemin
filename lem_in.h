@@ -5,7 +5,7 @@
 ** Login   <wery_a@epitech.net>
 ** 
 ** Started on  Fri Apr  3 17:46:37 2015 adrien wery
-** Last update Sun May  3 15:51:51 2015 axel vencatareddy
+** Last update Tue May  5 02:35:33 2015 consta_n
 */
 
 #ifndef LEM_IN_H_
@@ -28,6 +28,12 @@ typedef struct		link_s
   char			*room2;
   struct link_s		*next;
 }			link_t;
+
+typedef struct		s_path
+{
+  char			*name;
+  struct s_path		*next;
+}			t_path;
 
 typedef struct		room_s
 {
@@ -113,5 +119,7 @@ int	add_ant(t_ant **ant, char *name);
 int	lem_in(lem_t *lem);
 void	free_tab(int **tab);
 char	*my_alloc(int size);
-
+int	my_strcmp(char *s1, char *s2);
+void	pathfinding(lem_t *lem);
+int	add_path(t_path **path, char *name);
 #endif /* !LEM_IN_H_ */

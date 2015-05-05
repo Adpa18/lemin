@@ -5,7 +5,7 @@
 ** Login   <wery_a@epitech.net>
 ** 
 ** Started on  Fri Apr  3 17:32:29 2015 adrien wery
-** Last update Sun May  3 16:11:58 2015 axel vencatareddy
+** Last update Tue May  5 00:51:33 2015 consta_n
 */
 
 #include "lem_in.h"
@@ -83,7 +83,7 @@ int	main(int argc, char **argv)
       free_struct(lem);
       return (1);
     }
-  lem_in(lem);
+  pathfinding(lem);
   free_struct(lem);
   return (0);
 }
