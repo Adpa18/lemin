@@ -5,7 +5,7 @@
 ** Login   <consta_n@epitech.net>
 ** 
 ** Started on  Sun Apr  5 20:32:49 2015 consta_n
-** Last update Tue May  5 07:50:20 2015 axel vencatareddy
+** Last update Tue May  5 14:18:44 2015 Adrien WERY
 */
 
 #include "lem_in.h"
@@ -46,8 +46,10 @@ void		free_link(t_link *link)
 
 void		free_struct(t_lem *lem)
 {
-  free_room(lem->room);
-  free_link(lem->link);
+  if (lem->room)
+    free_room(lem->room);
+  if (lem->link)
+    free_link(lem->link);
   if (lem->start)
     free(lem->start);
   if (lem->end)

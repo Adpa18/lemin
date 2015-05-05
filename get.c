@@ -5,7 +5,7 @@
 ** Login   <vencat_a@epitech.net>
 ** 
 ** Started on  Sun May  3 15:28:27 2015 axel vencatareddy
-** Last update Tue May  5 13:40:53 2015 Adrien WERY
+** Last update Tue May  5 14:24:09 2015 Adrien WERY
 */
 
 #include "lem_in.h"
@@ -33,23 +33,22 @@ int		get_struct(int fd, t_lem *lem)
 {
   char		*s;
 
-  if ((lem->nb_ant =
-       my_getnbr_base(epur_str(get_next_line(fd)), "0123456789")) <= 0)
-    return (my_error("I need some ants to play", -1));
   while ((s = epur_str(get_next_line(fd))))
     {
-      if (my_strcmp("##start", s) == 0)
+      if (my_strcmp("##start", s) == 0 && !lem->start)
         {
           free(s);
           s = epur_str(get_next_line(fd));
-          if ((lem->start=check_line(s, &(lem->room), &(lem->link), 1)) == NULL)
+          if (s[0] != '#' && (lem->start = check_line(s, &(lem->room),
+						      &(lem->link), 1)) == NULL)
             return (-1);
         }
-      else if (my_strcmp("##end", s) == 0)
+      else if (my_strcmp("##end", s) == 0 && !lem->end)
         {
           free(s);
           s = epur_str(get_next_line(fd));
-          if ((lem->end = check_line(s, &(lem->room), &(lem->link), 2)) == NULL)
+          if (s[0] != '#' && (lem->end = check_line(s, &(lem->room),
+						    &(lem->link), 2)) == NULL)
             return (-1);
         }
       else if (check_line(s, &(lem->room), &(lem->link), 0) == NULL)

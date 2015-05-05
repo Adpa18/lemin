@@ -5,7 +5,7 @@
 ** Login   <vezia_l@epitech.net>
 ** 
 ** Started on  Sat May  2 20:26:22 2015 louis vezia
-** Last update Tue May  5 08:45:24 2015 axel vencatareddy
+** Last update Tue May  5 13:55:28 2015 Adrien WERY
 */
 
 #include "lem_in.h"
@@ -71,19 +71,27 @@ t_room		*set_parent(t_room *rooms)
   return (tmp);
 }
 
+t_room		*search_start(t_room *room, char *start)
+{
+  t_room	*tmp;
+
+  tmp = room;
+  while (tmp)
+    {
+      if (!my_strcmp(start, tmp->name))
+	break;
+      tmp = tmp->next;
+    }
+  return (tmp);
+}
+
 int		pathfinding(t_lem *lem)
 {
   t_room	*tmp_r1;
   t_room	*tmp_r2;
 
-  tmp_r1 = lem->room;
-  while (tmp_r1)
-    {
-      if (!my_strcmp(lem->start, tmp_r1->name))
-	break;
-      tmp_r1 = tmp_r1->next;
-    }
-  while (my_strcmp(tmp_r1->name, lem->end))
+  tmp_r1 = search_start(lem->room, lem->start);
+  while (tmp_r1 && my_strcmp(tmp_r1->name, lem->end))
     {
       tmp_r2 = lem->room;
       while (tmp_r2)
@@ -96,5 +104,7 @@ int		pathfinding(t_lem *lem)
       tmp_r1->road = 1;
       tmp_r1 = set_parent(lem->room);
     }
+  if (!tmp_r1)
+    return (my_error("No path to the end node", 1));
   return (display_path(lem));
 }

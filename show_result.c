@@ -5,7 +5,7 @@
 ** Login   <consta_n@epitech.net>
 ** 
 ** Started on  Tue May  5 03:17:48 2015 consta_n
-** Last update Tue May  5 09:26:11 2015 axel vencatareddy
+** Last update Tue May  5 14:24:36 2015 Adrien WERY
 */
 
 #include "lem_in.h"
@@ -19,11 +19,13 @@ int	show_result(char *file, t_lem *lem)
     return (1);
   while ((buff = epur_str(get_next_line(fd))) != NULL)
     {
-      if (printf("%s\n", buff) < 0)
-	{
-	  free(buff);
-	  return (my_error("A printf error occured", -1));
-	}
+      if (buff[0] != '#' || !my_strcmp(buff, "##start") ||
+	  !my_strcmp(buff, "##end"))
+	if (printf("%s\n", buff) < 0)
+	  {
+	    free(buff);
+	    return (my_error("A printf error occured", -1));
+	  }
       free(buff);
     }
   close(fd);

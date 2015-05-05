@@ -5,7 +5,7 @@
 ** Login   <wery_a@epitech.net>
 ** 
 ** Started on  Fri Apr  3 17:32:29 2015 adrien wery
-** Last update Tue May  5 13:41:57 2015 Adrien WERY
+** Last update Tue May  5 14:26:48 2015 Adrien WERY
 */
 
 #include "lem_in.h"
@@ -49,7 +49,7 @@ int	check_struct(t_lem *lem)
   if (!lem->end)
     return (my_error("No ##end in the file", -1));
   rooms = 0;
-  paths = 0;
+  paths = 1;
   show(lem->room, lem->link, &rooms, &paths);
   if (rooms < 2)
     return (my_error("Need 2 rooms or more", -1));
@@ -64,6 +64,9 @@ int	parsing(char *file, t_lem *lem)
 
   if ((fd = open(file, O_RDONLY)) == -1)
     return (my_error("Can't Open The File", 1));
+  if ((lem->nb_ant =
+       my_getnbr_base(epur_str(get_next_line(fd)), "0123456789")) <= 0)
+    return (my_error("I need some ants to play", -1));
   if (get_struct(fd, lem) == -1)
     return (my_error("Can't Get Rooms and Paths", 1));
   return (0);
