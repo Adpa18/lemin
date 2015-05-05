@@ -5,7 +5,7 @@
 ** Login   <vencat_a@epitech.net>
 ** 
 ** Started on  Sun May  3 15:28:27 2015 axel vencatareddy
-** Last update Tue May  5 07:51:44 2015 axel vencatareddy
+** Last update Tue May  5 13:40:53 2015 Adrien WERY
 */
 
 #include "lem_in.h"
@@ -42,7 +42,7 @@ int		get_struct(int fd, t_lem *lem)
         {
           free(s);
           s = epur_str(get_next_line(fd));
-          if ((lem->start=check_line(s,&(lem->room),&(lem->link),1)) == NULL)
+          if ((lem->start=check_line(s, &(lem->room), &(lem->link), 1)) == NULL)
             return (-1);
         }
       else if (my_strcmp("##end", s) == 0)
