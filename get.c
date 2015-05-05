@@ -5,7 +5,7 @@
 ** Login   <vencat_a@epitech.net>
 ** 
 ** Started on  Sun May  3 15:28:27 2015 axel vencatareddy
-** Last update Tue May  5 14:24:09 2015 Adrien WERY
+** Last update Tue May  5 18:30:37 2015 consta_n
 */
 
 #include "lem_in.h"
@@ -35,23 +35,24 @@ int		get_struct(int fd, t_lem *lem)
 
   while ((s = epur_str(get_next_line(fd))))
     {
-      if (my_strcmp("##start", s) == 0 && !lem->start)
+      if (my_strcmp("##start", s) == 0 && !lem->start && my_strcmp(s, "nil"))
         {
           free(s);
           s = epur_str(get_next_line(fd));
-          if (s[0] != '#' && (lem->start = check_line(s, &(lem->room),
-						      &(lem->link), 1)) == NULL)
+          if (s && my_strcmp(s, "nil") && s[0] != '#' &&
+	      (lem->start=check_line(s, &(lem->room), &(lem->link), 1)) == NULL)
             return (-1);
         }
-      else if (my_strcmp("##end", s) == 0 && !lem->end)
+      else if (my_strcmp("##end", s) == 0 && !lem->end && my_strcmp(s, "nil"))
         {
           free(s);
           s = epur_str(get_next_line(fd));
-          if (s[0] != '#' && (lem->end = check_line(s, &(lem->room),
-						    &(lem->link), 2)) == NULL)
+          if (s && my_strcmp(s, "nil") && s[0] != '#' &&
+	      (lem->end = check_line(s, &(lem->room), &(lem->link), 2)) == NULL)
             return (-1);
         }
-      else if (check_line(s, &(lem->room), &(lem->link), 0) == NULL)
+      else if (my_strcmp(s, "nil") &&
+	       check_line(s, &(lem->room), &(lem->link), 0) == NULL)
         return (-1);
     }
   return (check_struct(lem));

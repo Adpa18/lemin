@@ -5,7 +5,7 @@
 ** Login   <wery_a@epitech.net>
 ** 
 ** Started on  Sat Apr 25 15:05:35 2015 Adrien WERY
-** Last update Tue May  5 09:28:49 2015 axel vencatareddy
+** Last update Tue May  5 17:39:21 2015 consta_n
 */
 
 #include "lem_in.h"
@@ -29,6 +29,8 @@ t_lem		*init_lem()
   lem->nb_ant = 0;
   lem->room->name = NULL;
   lem->room->next = NULL;
+  lem->room->weight = -1;
+  lem->room->road = 1;
   lem->link = NULL;
   return (lem);
 }
@@ -36,7 +38,15 @@ t_lem		*init_lem()
 int		add_room(t_room **rooms, char *name, char cmd)
 {
   t_room	*room;
+  t_room	*tmp;
 
+  tmp = *rooms;
+  while (tmp)
+    {
+      if (!my_strcmp(name, tmp->name))
+	return (my_error("Room already exist", - 1));
+      tmp = tmp->next;
+    }
   if ((room = malloc(sizeof(t_room))) == NULL)
     return (my_error("struct.c : 45 Malloc Failed -> add_room", -1));
   if ((room->name = my_strdup(name)) == NULL)
@@ -91,12 +101,12 @@ void		show(t_room *room, t_link *link, int *rooms, int *paths)
 
   tmp1 = room;
   tmp2 = link;
-  while (tmp1->next)
+  while (tmp1)
     {
       tmp1 = tmp1->next;
       ++(*rooms);
     }
-  while (tmp2->next)
+  while (tmp2)
     {
       tmp2 = tmp2->next;
       ++(*paths);

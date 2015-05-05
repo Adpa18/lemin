@@ -5,7 +5,7 @@
 ** Login   <vencat_a@epitech.net>
 ** 
 ** Started on  Tue May  5 08:44:22 2015 axel vencatareddy
-** Last update Tue May  5 13:38:10 2015 consta_n
+** Last update Tue May  5 16:47:40 2015 consta_n
 */
 
 #include "lem_in.h"
@@ -79,6 +79,7 @@ int		display(t_lem *lem, t_path *path, int nb_ant)
       if (t.j < nb_ant + 1)
         t.j++;
     }
+  free_func(path);
   return (0);
 }
 

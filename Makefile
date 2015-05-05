@@ -5,14 +5,14 @@
 ## Login   <wery_a@epitech.net>
 ## 
 ## Started on  Tue Feb  3 16:12:36 2015 adrien wery
-## Last update Tue May  5 09:02:10 2015 axel vencatareddy
+## Last update Tue May  5 18:36:13 2015 consta_n
 ##
 
 CC	= gcc -g
 
 RM	= rm -f
 
-CFLAGS	= -W -Wall -Wextra -ansi -pedantic
+CFLAGS	= -W -Wall -Wextra
 
 SRCS	= main.c 		\
 	  str_write.c		\

@@ -5,7 +5,7 @@
 ** Login   <wery_a@epitech.net>
 ** 
 ** Started on  Fri Apr  3 17:46:37 2015 adrien wery
-** Last update Tue May  5 09:27:03 2015 axel vencatareddy
+** Last update Tue May  5 18:37:53 2015 consta_n
 */
 
 #ifndef LEM_IN_H_
@@ -92,7 +92,6 @@ char	*my_str_error(char *str, char *error);
 
 /* STR_OP FUNCTIONS */
 int	my_strcmp(char *s1, char *s2);
-int	my_strncmp(char *s1, char *s2, int nb);
 char	*my_strdup(char *s);
 void	my_memset(char *s, char c, int size);
 char	*epur_str(char *s);
@@ -138,5 +137,6 @@ char	*my_alloc(int size);
 int	my_strcmp(char *s1, char *s2);
 int	pathfinding(t_lem *lem);
 int	add_path(t_path **path, char *name);
+void	free_func(t_path *path);
 
 #endif /* !LEM_IN_H_ */

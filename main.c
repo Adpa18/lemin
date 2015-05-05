@@ -5,10 +5,19 @@
 ** Login   <wery_a@epitech.net>
 ** 
 ** Started on  Fri Apr  3 17:32:29 2015 adrien wery
-** Last update Tue May  5 14:26:48 2015 Adrien WERY
+** Last update Tue May  5 18:26:01 2015 consta_n
 */
 
 #include "lem_in.h"
+
+void	*free_ret(char **tab, char *s)
+{
+  if (tab)
+    free_double(tab);
+  if (s)
+    free(s);
+  return (NULL);
+}
 
 char	*check_line(char *s, t_room **room, t_link **link, char cmd)
 {
@@ -27,10 +36,10 @@ char	*check_line(char *s, t_room **room, t_link **link, char cmd)
     {
       if ((add_room(room, tab[0], cmd) == -1)
 	  || ((name = my_strdup(tab[0])) == NULL))
-	return (NULL);
+	return (free_ret(tab, s));
     }
   else if (get_path(room, link, my_str_to_wordtab(s, '-', 0)) == -1)
-    return (NULL);
+    return (free_ret(tab, s));
   free_double(tab);
   free(s);
   if (cmd == 1 || cmd == 2)
@@ -48,9 +57,10 @@ int	check_struct(t_lem *lem)
     return (my_error("No ##start in the file", -1));
   if (!lem->end)
     return (my_error("No ##end in the file", -1));
-  rooms = 0;
-  paths = 1;
+  rooms = -1;
+  paths = 0;
   show(lem->room, lem->link, &rooms, &paths);
+  printf("r = %d\tp = %d\n", rooms, paths);
   if (rooms < 2)
     return (my_error("Need 2 rooms or more", -1));
   else if (paths < rooms - 1)
@@ -61,14 +71,26 @@ int	check_struct(t_lem *lem)
 int	parsing(char *file, t_lem *lem)
 {
   int	fd;
+  char	*s;
 
   if ((fd = open(file, O_RDONLY)) == -1)
     return (my_error("Can't Open The File", 1));
+  while ((s = epur_str(get_next_line(fd))) && s[0] == '#')
+    free(s);
   if ((lem->nb_ant =
-       my_getnbr_base(epur_str(get_next_line(fd)), "0123456789")) <= 0)
-    return (my_error("I need some ants to play", -1));
+       my_getnbr_base(s, "0123456789")) <= 0)
+    {
+      close(fd);
+      free(s);
+      return (my_error("I need some ants to play", -1));
+    }
+  free(s);
   if (get_struct(fd, lem) == -1)
-    return (my_error("Can't Get Rooms and Paths", 1));
+    {
+      close(fd);
+      return (my_error("Can't Get Rooms and Paths", 1));
+    }
+  close(fd);
   return (0);
 }
 
@@ -79,7 +101,10 @@ int	main(int argc, char **argv)
   if (argc != 2)
     return (my_error("\n\tUsage : ./lem_in <file_name>\n", -1));
   if ((lem = init_lem()) == NULL)
-    return (my_error("Can't Init the lem struct", 1));
+    {
+      free_struct(lem);
+      return (my_error("Can't Init the lem struct", 1));
+    }
   if (parsing(argv[1], lem))
     {
       free_struct(lem);

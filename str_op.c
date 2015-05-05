@@ -5,7 +5,7 @@
 ** Login   <wery_a@epitech.net>
 ** 
 ** Started on  Sat Apr 25 15:14:13 2015 Adrien WERY
-** Last update Tue May  5 07:56:44 2015 axel vencatareddy
+** Last update Tue May  5 18:39:57 2015 consta_n
 */
 
 #include "lem_in.h"
@@ -18,18 +18,6 @@ int	my_strcmp(char *s1, char *s2)
     return (-1);
   i = 0;
   while (s1[i] != '\0' && s2[i] != '\0' && s1[i] == s2[i])
-    i += 1;
-  return (s1[i] - s2[i]);
-}
-
-int	my_strncmp(char *s1, char *s2, int nb)
-{
-  int	i;
-
-  if (s1 == NULL || s2 == NULL)
-    return (-1);
-  i = 0;
-  while (s1[i] == s2[i] && s1[i] != '\0' && i < nb - 1)
     i += 1;
   return (s1[i] - s2[i]);
 }
@@ -66,19 +54,26 @@ void	my_memset(char *s, char c, int size)
     s[i] = c;
 }
 
+char	*free_re(char *s)
+{
+  if (s)
+    free(s);
+  return (my_strdup("nil"));
+}
+
 char	*epur_str(char *s)
 {
   int	i;
   int	x;
 
-  if (!s)
+  if (s == NULL)
     return (NULL);
   i = 0;
   x = -1;
   while (s[i] && (s[i] == ' ' || s[i] == '\t'))
     ++i;
-  if (s[i] == '\0')
-    return (NULL);
+  if (!s[i])
+    return (free_re(s));
   while (s[i])
     {
       s[++x] = s[i];

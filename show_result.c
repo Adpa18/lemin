@@ -5,7 +5,7 @@
 ** Login   <consta_n@epitech.net>
 ** 
 ** Started on  Tue May  5 03:17:48 2015 consta_n
-** Last update Tue May  5 14:24:36 2015 Adrien WERY
+** Last update Tue May  5 18:24:49 2015 consta_n
 */
 
 #include "lem_in.h"
@@ -19,8 +19,8 @@ int	show_result(char *file, t_lem *lem)
     return (1);
   while ((buff = epur_str(get_next_line(fd))) != NULL)
     {
-      if (buff[0] != '#' || !my_strcmp(buff, "##start") ||
-	  !my_strcmp(buff, "##end"))
+      if ((buff[0] != '#' || !my_strcmp(buff, "##start") ||
+	  !my_strcmp(buff, "##end")) && my_strcmp("nil", buff))
 	if (printf("%s\n", buff) < 0)
 	  {
 	    free(buff);
