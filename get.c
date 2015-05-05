@@ -5,7 +5,7 @@
 ** Login   <vencat_a@epitech.net>
 ** 
 ** Started on  Sun May  3 15:28:27 2015 axel vencatareddy
-** Last update Tue May  5 18:30:37 2015 consta_n
+** Last update Tue May  5 20:04:38 2015 consta_n
 */
 
 #include "lem_in.h"
@@ -51,8 +51,7 @@ int		get_struct(int fd, t_lem *lem)
 	      (lem->end = check_line(s, &(lem->room), &(lem->link), 2)) == NULL)
             return (-1);
         }
-      else if (my_strcmp(s, "nil") &&
-	       check_line(s, &(lem->room), &(lem->link), 0) == NULL)
+      else if (check_line(s, &(lem->room), &(lem->link), 0) == NULL)
         return (-1);
     }
   return (check_struct(lem));

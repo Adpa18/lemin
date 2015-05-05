@@ -5,7 +5,7 @@
 ** Login   <wery_a@epitech.net>
 ** 
 ** Started on  Fri Apr  3 17:32:29 2015 adrien wery
-** Last update Tue May  5 18:26:01 2015 consta_n
+** Last update Tue May  5 20:10:53 2015 consta_n
 */
 
 #include "lem_in.h"
@@ -24,7 +24,7 @@ char	*check_line(char *s, t_room **room, t_link **link, char cmd)
   char	**tab;
   char	*name;
 
-  if (s[0] == '#')
+  if (s[0] == '#' || (s[0] == 'n' && s[1] == 'i' && s[2] == 'l'))
     {
       free(s);
       return ("comment");
@@ -60,7 +60,6 @@ int	check_struct(t_lem *lem)
   rooms = -1;
   paths = 0;
   show(lem->room, lem->link, &rooms, &paths);
-  printf("r = %d\tp = %d\n", rooms, paths);
   if (rooms < 2)
     return (my_error("Need 2 rooms or more", -1));
   else if (paths < rooms - 1)
