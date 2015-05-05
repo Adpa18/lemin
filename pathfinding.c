@@ -5,7 +5,7 @@
 ** Login   <vezia_l@epitech.net>
 ** 
 ** Started on  Sat May  2 20:26:22 2015 louis vezia
-** Last update Tue May  5 02:42:04 2015 consta_n
+** Last update Tue May  5 03:04:32 2015 axel vencatareddy
 */
 
 #include "lem_in.h"
@@ -17,8 +17,7 @@ void		display(t_path *path)
   tmp = path;
   while (tmp)
     {
-      my_str(path->name, 1);
-      my_putchar('\n');
+      printf("path->name = %s\n", tmp->name);
       tmp = tmp->next;
     }
 }
@@ -38,6 +37,8 @@ void		display_path(lem_t *lem)
       tmp = tmp->next;
     }
   tmp1 = lem->room;
+  printf("tmp->name = %s\n", tmp->name);
+  add_path(&path, tmp->name);
   while (tmp1)
     {
       while (tmp1)
@@ -46,6 +47,7 @@ void		display_path(lem_t *lem)
 	    break;
 	  tmp1 = tmp1->next;
 	}
+      printf("tmp1->name = %s\n", tmp1->name);
       add_path(&path, tmp1->name);
       if (!my_strcmp(tmp1->name, lem->start))
 	break;
